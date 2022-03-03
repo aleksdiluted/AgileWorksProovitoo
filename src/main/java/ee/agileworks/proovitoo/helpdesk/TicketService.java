@@ -12,17 +12,12 @@ public class TicketService {
     private TicketSystem ticketSystem;
 
     public RequestResult addNewTicket(TicketDto ticketDto) {
-
         RequestResult ticket = new RequestResult();
-//        ticket.setUserName(ticketDto.getUserName());
+        ticket.setUserName(ticketDto.getUserName());
         ticket.setDescription(ticketDto.getDescription());
         ticket.setEnteredDate(LocalDateTime.now());
         ticket.setDueDate(ticketDto.getDueDate());
-
-
         ticketSystem.incrementTicketIdCounter();
         return ticket;
     }
-
-
 }

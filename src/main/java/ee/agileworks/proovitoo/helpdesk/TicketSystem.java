@@ -22,5 +22,4 @@ public class TicketSystem {
     public void incrementTicketIdCounter() {
         ticketIdCounter++;
     }
-
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class RequestResult {
-//    private String userName;
+    private String userName;
     private String description;
     private LocalDateTime enteredDate;
     private LocalDateTime dueDate;
