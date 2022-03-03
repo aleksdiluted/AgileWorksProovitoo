@@ -1,29 +1,31 @@
 package ee.agileworks.proovitoo.helpdesk;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/helpdesk")
 public class TicketController {
 
-    public static Ticket ticket = new Ticket();
-
     @Resource
     private TicketService ticketService;
 
+    @Resource
+    private TicketSystem ticketSystem;
+
     @GetMapping("/ticket")
-    public Ticket getTicket() {
-        return ticket;
+    public TicketSystem getAllTicket() {
+        return ticketSystem;
     }
 
-    @GetMapping("/new/ticket")
-    public TicketDto controllerGetNewTicket() {
-        TicketDto newTicket = ticketService.createNewTicket();
-        return newTicket;
+    @PostMapping("/new/ticket")
+    public List<RequestResult> createNewTicket(@RequestBody TicketDto ticketDto) {
+        RequestResult result = ticketService.addNewTicket(ticketDto);
+        ticketSystem.addTicketToTickets(result);
+        List<RequestResult> tickets = ticketSystem.getTickets();
+        return tickets;
     }
 }

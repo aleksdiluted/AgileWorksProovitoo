@@ -2,19 +2,27 @@ package ee.agileworks.proovitoo.helpdesk;
 
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 @Service
 public class TicketService {
 
-    public TicketDto createNewTicket() {
+    @Resource
+    private TicketSystem ticketSystem;
 
-        TicketDto ticket = new TicketDto();
+    public RequestResult addNewTicket(TicketDto ticketDto) {
 
-        ticket.setUserName("uusKasutaja");
-        ticket.setDescription("On vaja luua uus pöördumine");
-        ticket.setEnteredDate(LocalDate.now());
-        ticket.setDueDate(LocalDate.of(2022, 04, 03));
+        RequestResult ticket = new RequestResult();
+//        ticket.setUserName(ticketDto.getUserName());
+        ticket.setDescription(ticketDto.getDescription());
+        ticket.setEnteredDate(LocalDateTime.now());
+        ticket.setDueDate(ticketDto.getDueDate());
+
+
+        ticketSystem.incrementTicketIdCounter();
         return ticket;
     }
+
+
 }
