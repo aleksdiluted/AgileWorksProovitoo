@@ -16,5 +16,4 @@ public class RequestResult {
     private LocalDateTime enteredDate;
     private LocalDateTime dueDate;
     private LocalDateTime dueDateMinusOneHour;
-//    private LocalDateTime timeNow;
 }
